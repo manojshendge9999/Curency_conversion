@@ -1,0 +1,226 @@
+<html>
+
+<head>
+
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+
+        function convert() {
+            var amtobj = document.getElementById('amtid')
+            //   alert(amtobj)   
+            amt = amtobj.value
+            // alert(amt)
+            var frmobj = document.getElementById('frmid');
+            frm = frmobj.value
+
+            // alert(frm)
+            var toobj = document.getElementById('toid');
+            to = toobj.value
+            // alert(to)
+            //    var h1obj = document.getElementById("one");
+
+            // x = h1obj.innerHTML;
+            // alert(x)
+            // re =  "Currency Converter";
+            var rid = document.getElementById('result');
+            //  resobj.innerHTML = result;
+
+            apilink = "https://api.exchangerate-api.com/v4/latest/" + frm;
+            // document.write(apilink)
+
+            //    var res = fetch(apilink);
+            //    document.write(res)
+            //    console.log(res)
+
+            fetch(apilink).then(
+                function (res) {
+                    // console.log(res.json())
+                    return res.json();
+
+                }).then(
+                    function (json) {
+                        // console.log(json)
+                        // console.log(json.rates)
+                        dict = json.rates;
+                        // console.log(dict['BHD'])
+                        cr = dict[to]
+                        res = cr * amt
+                        rid.innerHTML = res
+                    }
+                )
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="bg">
+        
+        
+        <h1 align="center" id="one">Currency Converter</h1>
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <th >Amount</th>
+                <td><input type="number" name="amt" id="amtid"></td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <td>
+                    <select name="from" id="frmid">
+                        <option value="select">Select</option>
+                        <option value="USD">America</option>
+                        <option value="INR">India</option>
+                        <option value="AED">United Arab Emirates</option>
+                        <option value="AUD">Australia</option>
+                        <option value="BDT">Bangladesh</option>
+                        <option value="CAD">Canada</option>
+                        <option value="CNY">China</option>
+                        <option value="DKK">Denmark</option>
+                        <option value="EGP">Egypt</option>
+                        <option value="EUR">France</option>
+                        <option value="EUR">Germany</option>
+                        <option value="HKD">Hong Kong</option>
+                        <option value="EUR">Italy</option>
+                        <option value="JPY">Japan</option>
+                        <option value="KWD">Kuwait</option>
+                        <option value="MYR">Malaysia</option>
+                        <option value="MXN">Maxico</option>
+                        <option value="NPR">Nepal</option>
+                        <option value="NZD">New Zealand</option>
+                        <option value="NOK">Norway</option>
+                        <option value="PLN">Poland</option>
+                        <option value="QAR">Qatar</option>
+                        <option value="EUR">Portugal</option>
+                        <option value="SGD">Singapur</option>
+                        <option value="SAR">Saudi Arabia</option>
+                        <option value="ZAR">Sauth Africa</option>
+                        <option value="EUR">Spain</option>
+                        <option value="SEK">Sweden</option>
+                        <option value="LKR">Sri Lanka</option>
+                        <option value="CHF">Switzerland</option>
+                        <option value="TWD">Taiwan</option>
+                        <option value="THB">Thailand</option>
+                        <option value="TRY">Turkey</option>
+                        <option value="GBP">United Kingdom</option>
+                        <option value="USN">United States</option>
+                        <option value="UAH">Ukraine</option>
+                        <option value="VEF">Venuzula</option>
+                        <option value="VND">Vietnam</option>
+                        <option value="ZWD">Zimbabwe</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>To</th>
+                <td>
+                    <select name="from" id="toid">
+                        <option value="select">Select</option>
+                        <option value="INR">India</option>
+                        <option value="USD">America</option>
+                        <option value="AED">United Arab Emirates</option>
+                        <option value="AUD">Australia</option>
+                        <option value="BDT">Bangladesh</option>
+                        <option value="CAD">Canada</option>
+                        <option value="CNY">China</option>
+                        <option value="DKK">Denmark</option>
+                        <option value="EGP">Egypt</option>
+                        <option value="EUR">France</option>
+                        <option value="EUR">Germany</option>
+                        <option value="HKD">Hong Kong</option>
+                        <option value="EUR">Italy</option>
+                        <option value="JPY">Japan</option>
+                        <option value="KWD">Kuwait</option>
+                        <option value="MYR">Malaysia</option>
+                        <option value="MXN">Maxico</option>
+                        <option value="NPR">Nepal</option>
+                        <option value="NZD">New Zealand</option>
+                        <option value="NOK">Norway</option>
+                        <option value="PLN">Poland</option>
+                        <option value="QAR">Qatar</option>
+                        <option value="EUR">Portugal</option>
+                        <option value="SGD">Singapur</option>
+                        <option value="SAR">Saudi Arabia</option>
+                        <option value="ZAR">Sauth Africa</option>
+                        <option value="EUR">Spain</option>
+                        <option value="SEK">Sweden</option>
+                        <option value="LKR">Sri Lanka</option>
+                        <option value="CHF">Switzerland</option>
+                        <option value="TWD">Taiwan</option>
+                        <option value="THB">Thailand</option>
+                        <option value="TRY">Turkey</option>
+                        <option value="GBP">United Kingdom</option>
+                        <option value="USN">United States</option>
+                        <option value="UAH">Ukraine</option>
+                        <option value="VEF">Venuzula</option>
+                        <option value="VND">Vietnam</option>
+                        <option value="ZWD">Zimbabwe</option>
+                    </select>
+                </td>
+            </tr>
+            <tr align="center">
+                <th colspan="2"><button onclick="convert()" id="btn">Convert</button>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2"><div id="result">Result</div></th>
+
+            </tr>
+        </table>
+        
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- 
+
+Accessing HTML elements/Form elements 
+values in javascript
+========================================
+step1:To access any element value create
+      object of that element in 
+	  javascript code.
+	  
+	  How to create element object?
+	  syntax:
+	  document.getElementById('idname');
+	  
+	  var amtobj=document.getElementById('amtid');
+	  alert(amtobj); -->
+
+<!-- 
+
+
+
+
+      From : USD
+TO   : INR
+
+From : BASE
+
+1   USD  ===> 82.5 INR 
+200 USD  ===> X INR 
+
+X x 1  = 200 x 82.5
+X      = 200 x 82.5
+
+
+FROM: INR 
+TO  : USD
+BASE:INR
+
+From javascript there is need to give GET request to server which
+has conversion data.
+
+fetch() function is used to provide request to that server from  
+javascript -->
